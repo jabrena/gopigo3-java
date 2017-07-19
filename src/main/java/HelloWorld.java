@@ -22,8 +22,8 @@ public class HelloWorld {
                 SpiDevice.DEFAULT_SPI_MODE); // default spi mode 0
 
         byte data[] = new byte[] {
-                (byte) 8,                              // first byte, start bit
-                (byte) "SET_MOTOR_PWM",    // SET_MOTOR_PWM
+                (byte) 8,  // first byte, start bit
+                (byte) 10,// SET_MOTOR_PWM
                 (byte) 0x01,
                 (byte) 100, // MOTOR_LEFT  = 0x01 MOTOR_RIGHT = 0x02
         };

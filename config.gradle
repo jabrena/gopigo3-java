@@ -2,7 +2,7 @@
 remotes {
     ev3dev {
         host = '192.168.1.98'
-        user = 'robot'
-        password = 'maker'
+        user = 'pi'
+        password = 'robots1234'
     }
 }
