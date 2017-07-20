@@ -1,7 +1,7 @@
 
 task testConnection << {
     ssh.run {
-        session(remotes.ev3dev) {
+        session(remotes.gopigo3) {
             println "ls "
             execute "ls "
         }
@@ -10,7 +10,7 @@ task testConnection << {
 
 task deploy << {
     ssh.run {
-        session(remotes.ev3dev) {
+        session(remotes.gopigo3) {
             put from: "./build/libs/" + "${rootProject.name}" + "-all-" + version + ".jar", into: "/home/pi/"
         }
     }
@@ -19,16 +19,16 @@ deploy.dependsOn clean, fatJar
 
 task remoteRun << {
     ssh.run {
-        session(remotes.ev3dev) {
-            println "java -server -jar /home/robot/" + "${rootProject.name}" + "-all-" + version + ".jar "
-            execute "java -server -jar /home/robot/" + "${rootProject.name}" + "-all-" + version + ".jar "
+        session(remotes.gopigo3) {
+            println "java -server -jar /home/pi/" + "${rootProject.name}" + "-all-" + version + ".jar "
+            execute "java -server -jar /home/pi/" + "${rootProject.name}" + "-all-" + version + ".jar "
         }
     }
 }
 
 task remoteSudoRun << {
     ssh.run {
-        session(remotes.ev3dev) {
+        session(remotes.gopigo3) {
             println "echo -e \"maker\" | sudo -S java -server -jar /home/robot/" + "${rootProject.name}" + "-" + version + "-all" + ".jar"
             execute "echo -e \"maker\" | sudo -S java -server -jar /home/robot/" + "${rootProject.name}" + "-" + version + "-all" + ".jar"
         }
@@ -37,7 +37,7 @@ task remoteSudoRun << {
 
 task remoteProfilingRun << {
     ssh.run {
-        session(remotes.ev3dev) {
+        session(remotes.gopigo3) {
             println "java -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.port=7091 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -server -jar /home/robot/" + "${rootProject.name}" + "-all-" + version + ".jar "
             execute "java -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.port=7091 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -server -jar /home/robot/" + "${rootProject.name}" + "-all-" + version + ".jar "
         }
