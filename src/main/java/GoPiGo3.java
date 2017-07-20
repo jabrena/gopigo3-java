@@ -30,8 +30,8 @@ public class GoPiGo3 {
         byte command[] = new byte[] {
                 (byte) 8,       // first byte, start bit
                 (byte) 10,      // SET_MOTOR_PWM
-                (byte) motor,
-                (byte) power,
+                (byte) motor,   // 1 | 2
+                (byte) power,   // 0 - 100
         };
 
         this.spi.write(command);
